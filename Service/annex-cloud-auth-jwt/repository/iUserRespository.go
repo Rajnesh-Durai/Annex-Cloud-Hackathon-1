@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"login-jwt/entity"
+	"annex-cloud-auth-jwt/entity"
 	"github.com/google/uuid"
 )
 
