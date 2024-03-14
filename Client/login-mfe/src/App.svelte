@@ -5,6 +5,6 @@
 </script>
 
 <Router >
-    <Route path="/"><Login /></Route>
+    <Route path="/"><Login/></Route>
     <Route path="dashboard"><Dashboard/></Route>
 </Router>
