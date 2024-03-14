@@ -2,9 +2,9 @@ package repository
 
 import (
 	"errors"
-	"login-jwt/entity"
-	"login-jwt/dto/requestDto"
-	"login-jwt/helper"
+	"annex-cloud-auth-jwt/entity"
+	"annex-cloud-auth-jwt/dto/requestDto"
+	"annex-cloud-auth-jwt/helper"
     "github.com/google/uuid"
 
 	"gorm.io/gorm"
