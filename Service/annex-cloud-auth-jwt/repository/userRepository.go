@@ -27,20 +27,20 @@ func (u *UserRepository) Delete(userId uuid.UUID) {
 
 // GetAll implements UsersRepository
 func (u *UserRepository) GetAll() []entity.User {
-	var users []entity.User
-	results := u.Db.Find(&users)
+	var user []entity.User
+	results := u.Db.Find(&user)
 	helper.ErrorPanic(results.Error)
-	return users
+	return user
 }
 
 // GetById implements UsersRepository
-func (u *UserRepository) GetById(usersId uuid.UUID) (entity.User, error) {
+func (u *UserRepository) GetById(userId uuid.UUID) (entity.User, error) {
 	var user entity.User
-	result := u.Db.Find(&user, usersId)
+	result := u.Db.Find(&user, userId)
 	if result != nil {
 		return user, nil
 	} else {
-		return user, errors.New("users is not found")
+		return user, errors.New("user is not found")
 	}
 }
 
@@ -52,7 +52,7 @@ func (u *UserRepository) Save(user entity.User) {
 
 // Update implements UsersRepository
 func (u *UserRepository) Update(user entity.User) {
-	updateUser := requestdto.UpdateUsersRequestDto{
+	updateUser := requestdto.UpdateUserRequestDto{
 		Id:       uuid.New(),
 		Username: user.Username,
 		Email:    user.Email,

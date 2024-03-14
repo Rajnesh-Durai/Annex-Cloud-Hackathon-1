@@ -48,16 +48,15 @@ func (controller *AuthenticationController) Login(ctx *gin.Context) {
 		Data:    resp,
 	}
 
-	// ctx.SetCookie("token", token, config.TokenMaxAge*60, "/", "localhost", false, true)
 	ctx.JSON(http.StatusOK, webResponse)
 }
 
 func (controller *AuthenticationController) Register(ctx *gin.Context) {
-	createUsersRequest := requestdto.CreateUsersRequestDto{}
-	err := ctx.ShouldBindJSON(&createUsersRequest)
+	createUserRequest := requestdto.CreateUserRequestDto{}
+	err := ctx.ShouldBindJSON(&createUserRequest)
 	helper.ErrorPanic(err)
 
-	controller.authenticationService.Register(createUsersRequest)
+	controller.authenticationService.Register(createUserRequest)
 
 	webResponse := responsedto.ResponseDto{
 		Code:    200,
