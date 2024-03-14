@@ -2,7 +2,7 @@ package controller
 
 import (
 	"fmt"
-	responsedto "annex-cloud-auth-jwt/dto/reponseDto"
+	responsedto "annex-cloud-auth-jwt/dto/responseDto"
 	requestdto "annex-cloud-auth-jwt/dto/requestDto"
 	"annex-cloud-auth-jwt/helper"
 	"annex-cloud-auth-jwt/service"

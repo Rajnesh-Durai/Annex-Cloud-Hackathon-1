@@ -1,9 +1,9 @@
 package middleware
 
 import (
-	"login-jwt/config"
-	"login-jwt/repository"
-	"login-jwt/utils"
+	"annex-cloud-auth-jwt/config"
+	"annex-cloud-auth-jwt/repository"
+	"annex-cloud-auth-jwt/utils"
 	"net/http"
 	"strings"
 
