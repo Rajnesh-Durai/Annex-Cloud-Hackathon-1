@@ -1,8 +1,8 @@
 <script>
   import { navigate } from 'svelte-routing';
 
-  let fieldaLogo ="https://annexfe.blob.core.windows.net/fe-images/fielda-logo1.png";
-  let loginImage = "https://annexfe.blob.core.windows.net/fe-images/Vector-Smart-Object.svg";
+  let fieldaLogo ="https://annexstorage.blob.core.windows.net/annexcontainer/fielda-logo1.png";
+  let loginImage = "https://annexstorage.blob.core.windows.net/annexcontainer/Vector-Smart-Object.svg";
   
   let email = '';
   let password = '';
