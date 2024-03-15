@@ -1,14 +1,15 @@
 package service
 
 import (
-	"errors"
-	"fmt"
 	"annex-cloud-auth-jwt/config"
 	requestdto "annex-cloud-auth-jwt/dto/requestDto"
 	"annex-cloud-auth-jwt/entity"
 	"annex-cloud-auth-jwt/helper"
 	"annex-cloud-auth-jwt/repository"
 	"annex-cloud-auth-jwt/utils"
+	"errors"
+	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 
@@ -28,15 +29,15 @@ func NewAuthenticationService(usersRepository repository.IUserRepository, valida
 }
 
 // Login implements AuthenticationService
-func (a *AuthenticationServiceImpl) Login(users requestdto.LoginRequestDto) (string, error) {
+func (a *AuthenticationServiceImpl) Login(user requestdto.LoginRequestDto) (string, error) {
 	// Find username in database
-	newUser, err := a.UsersRepository.GetByEmail(users.Email)
+	newUser, err := a.UsersRepository.GetByEmail(user.Email)
 	if err != nil {
 		return "", errors.New("invalid username or password")
 	}
 
 	// Verify password
-	if err := utils.VerifyPassword(newUser.Password, users.Password); err != nil {
+	if err := utils.VerifyPassword(newUser.Password, user.Password); err != nil {
 		return "", errors.New("invalid username or password")
 	}
 
@@ -59,17 +60,19 @@ func (a *AuthenticationServiceImpl) Login(users requestdto.LoginRequestDto) (str
 
 
 // Register implements AuthenticationService
-func (a *AuthenticationServiceImpl) Register(users requestdto.CreateUsersRequestDto) {
+func (a *AuthenticationServiceImpl) Register(user requestdto.CreateUserRequestDto) {
 
-	hashedPassword, err := utils.HashPassword(users.Password)
+	hashedPassword, err := utils.HashPassword(user.Password)
 	helper.ErrorPanic(err)
 
 	newUser := entity.User{
 		Id: uuid.New(),
-		Username: users.Username,
-		Email:    users.Email,
+		Username: user.Username,
+		Email:    user.Email,
 		Password: hashedPassword,
-		Role: users.Role,
+		Role: user.Role,
+		CreatedOn: time.Now(),
+		CreatedBy: user.Username,
 	}
 	a.UsersRepository.Save(newUser)
 }

@@ -10,7 +10,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// DeserializeUser middleware
 func DeserializeUser(userRepository repository.IUserRepository) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var token string
