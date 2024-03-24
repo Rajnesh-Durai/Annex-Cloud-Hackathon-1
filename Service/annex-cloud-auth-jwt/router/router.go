@@ -25,8 +25,8 @@ func NewRouter(userRepository repository.IUserRepository, authenticationControll
 	authenticationRouter.POST("/register", authenticationController.Register)
 	authenticationRouter.POST("/login", authenticationController.Login)
 
-	usersRouter := router.Group("/users")
-	usersRouter.GET("", middleware.DeserializeUser(userRepository), usersController.GetUsers)
+	userRouter := router.Group("/users")
+	userRouter.GET("", middleware.DeserializeUser(userRepository), usersController.GetUsers)
 
 	return service
 }

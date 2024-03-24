@@ -15,3 +15,10 @@ func ConnectionDB(config *Config) *gorm.DB {
 	fmt.Println("🚀 Connected Successfully to the Database")
 	return db
 }
+// type DB struct {
+//     *Config
+//     Error        error
+//     RowsAffected int64
+//     Statement    *Statement
+//     clone        int
+// }
