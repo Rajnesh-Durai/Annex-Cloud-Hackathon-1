@@ -5,7 +5,8 @@ import (
 
 	"github.com/spf13/viper"
 )
-
+//mapstructure - It's a library that helps in mapping arbitrary data into Go structures
+//				 specify how environment variables should be mapped to struct fields
 type Config struct {
 	DBHost     string `mapstructure:"POSTGRES_HOST"`
 	DBUsername string `mapstructure:"POSTGRES_USER"`
@@ -35,3 +36,7 @@ func LoadConfig(path string) (config Config, err error) {
 	err = viper.Unmarshal(&config)
 	return
 }
+// When the application starts, it calls the LoadConfig function to load the configuration.
+// The configuration can be stored in environment variables or a configuration file.
+// Viper reads the configuration and maps it to the Config struct using mapstructure.
+// The application can then use the Config struct to access configuration parameters throughout its execution.

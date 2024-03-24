@@ -15,9 +15,9 @@ type CustomClaims struct {
 }
 
 func GenerateToken(ttl time.Duration, payload CustomClaims, secretJWTKey string) (string, error) {
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, payload)
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, payload) //Creates Tokenn
 
-	tokenString, err := token.SignedString([]byte(secretJWTKey))
+	tokenString, err := token.SignedString([]byte(secretJWTKey)) // assigning the secretKey for the token
 
 	if err != nil {
 		return "", fmt.Errorf("generating JWT Token failed: %w", err)

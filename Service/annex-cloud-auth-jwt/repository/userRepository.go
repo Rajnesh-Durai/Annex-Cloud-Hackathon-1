@@ -6,7 +6,7 @@ import (
 	"annex-cloud-auth-jwt/dto/requestDto"
 	"annex-cloud-auth-jwt/helper"
     "github.com/google/uuid"
-
+	responsedto "annex-cloud-auth-jwt/dto/responseDto"
 	"gorm.io/gorm"
 )
 
@@ -45,7 +45,7 @@ func (u *UserRepository) GetById(userId uuid.UUID) (entity.User, error) {
 }
 
 // Save implements UsersRepository
-func (u *UserRepository) Save(user entity.User) {
+func (u *UserRepository) Save(user requestdto.CreateUserRequestDto) {
 	result := u.Db.Create(&user)
 	helper.ErrorPanic(result.Error)
 }
@@ -57,19 +57,21 @@ func (u *UserRepository) Update(user entity.User) {
 		Username: user.Username,
 		Email:    user.Email,
 		Password: user.Password,
-		Role: 	user.Role,
+		RoleId: 	user.RoleId,
 	}
 	result := u.Db.Model(&user).Updates(updateUser)
 	helper.ErrorPanic(result.Error)
 }
 
 // GetByUsername implements UsersRepository
-func (u *UserRepository) GetByEmail(email string) (entity.User, error) {
-	var user entity.User
-	result := u.Db.First(&user, "email = ?", email)
+func (u *UserRepository) GetByEmail(email string) (responsedto.UsersResponseDto, error) {
+	var user responsedto.UsersResponseDto
 
-	if result.Error != nil {
-		return user, errors.New("invalid email or Password")
-	}
-	return user, nil
+    // Call stored procedure using GORM
+    result := u.Db.Raw("CALL sp_GetUserByEmail(?)", email).Scan(&user)
+    if result.Error != nil {
+        return user, errors.New("user not found")
+    }
+
+    return user, nil
 }
