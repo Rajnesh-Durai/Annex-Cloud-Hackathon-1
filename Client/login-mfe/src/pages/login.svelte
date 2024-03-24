@@ -76,9 +76,9 @@
 	>
 		<div class="max-w-xs">
 			<img
-				src="https://www.annexcloud.com/wp-content/themes/berg-theme-child/dist/images/slider-accordion-bottom--bg.webp?v=271cf807fd7566fb54c7ba626ec5b8c0"
+				src="https://www.annexcloud.com/wp-content/uploads/2023/04/favicon.png"
 				alt=""
-				class="relative top-full left-80 h-16 w-16 hidden xl:block"
+				class="relative top-full left-80 h-10 w-10 hidden xl:block"
 			/>
 		</div>
 	</div>
