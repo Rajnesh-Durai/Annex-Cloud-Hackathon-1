@@ -1,18 +1,19 @@
 package requestdto
 
 import (
-	"github.com/google/uuid"
 	"time"
+
+	"github.com/google/uuid"
 )
 
 type CreateUserRequestDto struct {
-	Id       uuid.UUID `validate:"required" json:"user_id"`
-	Username string `validate:"required,min=2,max=50" json:"username"`
-	Email    string `validate:"required,min=2,max=100" json:"email"`
-	Password string `validate:"required,min=2,max=100" json:"password"`
-	RoleId    uuid.UUID    `validate:"required" json:"role_id"`
+	UserId    uuid.UUID `validate:"required" json:"user_id"`
+	Username  string    `validate:"required,min=2,max=50" json:"username"`
+	Email     string    `validate:"required,min=2,max=100" json:"email"`
+	Password  string    `validate:"required,min=2,max=100" json:"password"`
+	RoleId    uuid.UUID `validate:"required" json:"role_id"`
 	CreatedOn time.Time `validate:"required" json:"created_on"`
-	CreatedBy string `validate:"required,min=2,max=50" json:"created_by"`
+	CreatedBy string    `validate:"required,min=2,max=50" json:"created_by"`
 }
 
 type UpdateUserRequestDto struct {
@@ -20,7 +21,7 @@ type UpdateUserRequestDto struct {
 	Username string    `validate:"required,max=50,min=2" json:"username"`
 	Email    string    `validate:"required,min=2,max=100" json:"email"`
 	Password string    `validate:"required,min=2,max=100" json:"password"`
-	RoleId   uuid.UUID       `validate:"required" json:"role_id"`
+	RoleId   uuid.UUID `validate:"required" json:"role_id"`
 }
 
 type LoginRequestDto struct {

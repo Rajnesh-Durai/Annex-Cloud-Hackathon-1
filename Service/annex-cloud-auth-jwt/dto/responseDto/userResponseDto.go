@@ -1,18 +1,15 @@
 package reponsedto
 
 import (
-	"time"
 
 	"github.com/google/uuid"
 )
 
 type UsersResponseDto struct {
-	Id       uuid.UUID    `json:"user_id"`
+	UserId       uuid.UUID    `json:"user_id"`
 	Username string `json:"username"`
-	Email    string `json:"email"`
 	Password string `json:"password"`
-	Role string `json:"role_name"`
-	CreatedOn time.Time `json:"created_on"`
+	RoleName string `json:"role_name"`
 	CreatedBy string `json:"created_by"`
 }
 

@@ -1,23 +1,25 @@
 package entity
 
 import (
+	"regexp"
 	"time"
-    "regexp"
+
 	"github.com/google/uuid"
 )
-type User struct {
-	Id       uuid.UUID `db:"user_id" gorm:"type:uuid;primaryKey"`
-	Username string    `db:"username" gorm:"type:varchar(255);not null"`
-	Email    string `db:"email" gorm:"uniqueIndex;not null"`
-	Password string `db:"password" gorm:"not null"`
-	RoleId	 uuid.UUID `db:"role_id" gorm:"type:uuid;not null"`
-	CreatedOn time.Time `db:"created_on" gorm:"type:timestamptz;not null"`
-	CreatedBy string    `db:"created_by" gorm:"type:varchar(255);not null"`
 
-	Role Role `gorm:"foreignKey:RoleId"`
+type User struct {
+	Id        uuid.UUID `gorm:"type:uuid;primaryKey;column:user_id"`
+	Username  string    `gorm:"type:varchar(50);not null;column:username"`
+	Email     string    `gorm:"uniqueIndex;not null;column:email"`
+	Password  string    `gorm:"not null;column:password"`
+	RoleId    uuid.UUID `gorm:"column:role_id"`
+	CreatedOn time.Time `gorm:"type:timestamptz;not null;column:created_on"`
+	CreatedBy string    `gorm:"type:varchar(50);not null;column:created_by"`
+
+	RoleRef Role `gorm:"foreignkey:RoleId;references:Id"`
 }
 
 func (u *User) ValidatePassword() bool {
-    regex := regexp.MustCompile(`^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$`)
-    return regex.MatchString(u.Password)
+	regex := regexp.MustCompile(`^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$`)
+	return regex.MatchString(u.Password)
 }
