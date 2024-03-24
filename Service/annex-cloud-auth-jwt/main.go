@@ -27,30 +27,22 @@ func main() {
 	db := config.ConnectionDB(&loadConfig)
 	validate := validator.New()
 
-	db.Table("roles").AutoMigrate(&entity.Role{})
-	db.Table("users").AutoMigrate(&entity.User{})
+	//db.Table("roles").AutoMigrate(&entity.Role{})
+	//db.Table("users").AutoMigrate(&entity.User{})
 
 	//Init Repository
 	//which returns the address of userRepository
 	//the caller of NewUserRepository gets pointer of UserRepository
 	userRepository := repository.NewUserRepository(db)
-	if err != nil {
-        log.Fatal("🚀 Failed to initialize user repository", err)
-    }
+
 	//Init Service
 	authenticationService := service.NewAuthenticationService(userRepository, validate)
-	if err != nil {
-        log.Fatal("🚀 Failed to initialize user authenticationService", err)
-    }
+
 	//Init controller
 	authenticationController := controller.NewAuthenticationController(authenticationService)
-	if err != nil {
-        log.Fatal("🚀 Failed to initialize user authenticationController", err)
-    }
+
 	userController := controller.NewUsersController(userRepository)
-	if err != nil {
-        log.Fatal("🚀 Failed to initialize user userController", err)
-    }
+
 	routes := router.NewRouter(userRepository, authenticationController, userController)
 
 	// Create a new Gin router instance
