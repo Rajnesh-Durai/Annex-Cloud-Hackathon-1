@@ -1,14 +1,14 @@
 package repository
 
 import (
-	"annex-cloud-auth-jwt/entity"
-	"github.com/google/uuid"
-	"annex-cloud-auth-jwt/dto/requestDto"
 	responsedto "annex-cloud-auth-jwt/dto/responseDto"
+	"annex-cloud-auth-jwt/entity"
+
+	"github.com/google/uuid"
 )
 
 type IUserRepository interface {
-	Save(user requestdto.CreateUserRequestDto)
+	Save(user entity.User)
 	Update(user entity.User)
 	Delete(userId uuid.UUID)
 	GetById(userId uuid.UUID) (entity.User, error)

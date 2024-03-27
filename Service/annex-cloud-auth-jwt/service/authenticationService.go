@@ -3,6 +3,7 @@ package service
 import (
 	"annex-cloud-auth-jwt/config"
 	requestdto "annex-cloud-auth-jwt/dto/requestDto"
+	"annex-cloud-auth-jwt/entity"
 	"annex-cloud-auth-jwt/helper"
 	"annex-cloud-auth-jwt/repository"
 	"annex-cloud-auth-jwt/utils"
@@ -42,8 +43,8 @@ func (a *AuthenticationServiceImpl) Login(user requestdto.LoginRequestDto) (stri
 
 	// Generate CustomClaims with user details
 	claims := utils.CustomClaims{
-		Sub:      newUser.Id.String(), // Assuming newUser.Id is of type uuid.UUID
-		Role:     newUser.Role,
+		Sub:      newUser.UserId.String(),
+		Role:     newUser.RoleName,
 		Username: newUser.Username,
 	}
 
@@ -64,7 +65,7 @@ func (a *AuthenticationServiceImpl) Register(user requestdto.CreateUserRequestDt
 	hashedPassword, err := utils.HashPassword(user.Password)
 	helper.ErrorPanic(err)
 
-	newUser := requestdto.CreateUserRequestDto{
+	newUser := entity.User{
 		Id: uuid.New(),
 		Username: user.Username,
 		Email:    user.Email,

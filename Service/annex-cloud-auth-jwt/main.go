@@ -27,9 +27,8 @@ func main() {
 	db := config.ConnectionDB(&loadConfig)
 	validate := validator.New()
 
-	//db.Table("roles").AutoMigrate(&entity.Role{})
-	//db.Table("users").AutoMigrate(&entity.User{})
-
+	db.AutoMigrate(&entity.Role{})
+	db.AutoMigrate(&entity.User{})
 	//Init Repository
 	//which returns the address of userRepository
 	//the caller of NewUserRepository gets pointer of UserRepository
@@ -51,7 +50,7 @@ func main() {
 
 	// Configure CORS middleware
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:8080"}, // Add your frontend URL here
+		AllowOrigins:     []string{"http://localhost:5173"}, // Add your frontend URL here
 		AllowCredentials: true,
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
 		AllowHeaders:     []string{"Origin", "Authorization", "Content-Type"},
@@ -74,6 +73,6 @@ func main() {
 	server_err := server.ListenAndServe() //let us connect on tcp address and checks for any incoming request
 	helper.ErrorPanic(server_err)
 	if err != nil {
-        log.Fatal("🚀 Failed to server", err)
-    }
+		log.Fatal("🚀 Failed to server", err)
+	}
 }
