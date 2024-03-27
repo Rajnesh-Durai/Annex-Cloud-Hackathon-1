@@ -58,7 +58,7 @@
 					console.log('Login successfully');
 					console.log(data);
 					//toast.success('LoggedIn Successfully');
-					sessionStorage.setItem('token', data.data.token);
+					localStorage.setItem('token', data.data.token);
 					navigate('/dashboard');
 				})
 				.catch((error) => {
