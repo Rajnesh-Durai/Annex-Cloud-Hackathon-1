@@ -55,14 +55,11 @@
 					return response.json();
 				})
 				.then((data) => {
-					console.log('Login successfully');
 					console.log(data);
-					//toast.success('LoggedIn Successfully');
 					localStorage.setItem('token', data.data.token);
 					navigate('/dashboard');
 				})
 				.catch((error) => {
-					//  toast.error("Invalid Credentials");
 					console.error('login error in:', error);
 				});
 		}
